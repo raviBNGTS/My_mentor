@@ -72,11 +72,10 @@
 	<script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
 	<script>
 		window.addEventListener("DOMContentLoaded", function() {
-          // Initialize Jotform agent
           window.AgentInitializer.init({
-            agentRenderURL: "https://agent.jotform.com/0196755e9efa7a6a9d27ea293d55015ca0d1",
-            rootId: "JotformAgent-0196755e9efa7a6a9d27ea293d55015ca0d1",
-            formID: "0196755e9efa7a6a9d27ea293d55015ca0d1",
+            agentRenderURL: "https://agent.jotform.com/01967d36677575e39022c9b84455fbeab336",
+            rootId: "JotformAgent-01967d36677575e39022c9b84455fbeab336",
+            formID: "01967d36677575e39022c9b84455fbeab336",
             queryParams: ["skipWelcome=1", "maximizable=1"],
             domain: "https://www.jotform.com",
             isDraggable: false,
@@ -87,11 +86,15 @@
             customizations: {
               "greeting": "Yes",
               "greetingMessage": "Hi! How can I assist you?",
+              "openByDefault": "No",
               "pulse": "Yes",
-              "position": "right"
+              "position": "right",
+              "autoOpenChatIn": "0"
             },
             isVoice: false,
           });
+
+
 
           // Attach click listeners to select buttons
           const buttons = document.querySelectorAll('.select-button');
