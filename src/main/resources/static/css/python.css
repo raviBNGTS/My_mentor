@@ -1,0 +1,207 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+
+body {
+	background: #0a0a23; /* Deep space navy */
+	color: #e0e0ff; /* Light cosmic text */
+	line-height: 1.6;
+	position: relative;
+	overflow-x: hidden;
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 60px;
+	background: linear-gradient(180deg, rgba(10, 10, 35, 0.95),
+		rgba(10, 10, 35, 0.8));
+	box-shadow: 0 4px 15px rgba(0, 128, 255, 0.2);
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 1000;
+	border-bottom: 1px solid rgba(0, 128, 255, 0.15);
+}
+
+.logo {
+	font-size: 26px;
+	font-weight: 700;
+	color: #00b7eb;
+	text-shadow: 0 0 8px rgba(0, 183, 235, 0.5);
+	letter-spacing: 1px;
+}
+
+nav ul {
+	list-style: none;
+	display: flex;
+	align-items: center;
+}
+
+nav ul li {
+	margin-left: 35px;
+}
+
+nav ul li a {
+	text-decoration: none;
+	color: #e0e0ff;
+	font-weight: 500;
+	font-size: 16px;
+	padding: 8px 12px;
+	border-radius: 5px;
+	transition: all 0.3s ease;
+}
+
+nav ul li a:hover, nav ul li a.active {
+	color: #00b7eb;
+	background: rgba(0, 128, 255, 0.1);
+	text-shadow: 0 0 5px rgba(0, 183, 235, 0.4);
+}
+
+.heading {
+	text-align: center;
+	margin-top: 80px;
+	font-size: 40px;
+	text-shadow: 0 0 15px rgba(0, 183, 235, 0.6);
+}
+
+#courses {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 100%;
+	height: 100vh;
+	gap: 10px;
+	margin: 10px;
+}
+
+.course-details {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	margin-top: 30px;
+	width: 42%;
+	height: 85vh;
+	border-radius: 10px;
+	box-shadow: 0px 0px 1px 1px white;
+}
+
+.course-details h1 {
+	font-size: 42px;
+	color: #e0e0ff;
+	font-weight: 700;
+	margin-bottom: 10px;
+	text-shadow: 0 0 15px rgba(0, 183, 235, 0.6);
+	animation: fadeInUp 1s ease-out;
+}
+
+.course-details p {
+	font-size: 18px;
+	color: #ccd1ff;
+	max-width: 700px;
+	margin: 0 auto 20px;
+	text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.course-details h3 {
+	font-size: 24px;
+	color: #00b7eb;
+	font-weight: 600;
+	margin: 15px 0 10px;
+	text-shadow: 0 0 8px rgba(0, 183, 235, 0.4);
+}
+
+.course-details h3 span {
+	color: #e0e0ff;
+}
+
+.course-details p strong {
+	color: #e0e0ff;
+}
+
+.btn {
+	display: inline-block;
+	padding: 12px 30px;
+	border: none;
+	border-radius: 25px;
+	color: #fff;
+	font-size: 16px;
+	font-weight: 500;
+	cursor: pointer;
+	text-decoration: none;
+	transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s
+		ease;
+	margin: 10px;
+}
+
+.buy-course-btn {
+	background: linear-gradient(90deg, #00b7eb, #007acc);
+	box-shadow: 0 0 10px rgba(0, 183, 235, 0.3);
+}
+
+.buy-course-btn:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 0 20px rgba(0, 183, 235, 0.6);
+	background: linear-gradient(90deg, #007acc, #00b7eb);
+}
+
+.consultation-options {
+	margin: 30px 0;
+}
+
+.consultation-options h4 {
+	font-size: 20px;
+	color: #e0e0ff;
+	margin-bottom: 15px;
+	text-shadow: 0 0 5px rgba(0, 183, 235, 0.4);
+}
+
+.video-call-btn {
+	background: linear-gradient(90deg, #4caf50, #388e3c);
+	/* WhatsApp green */
+	box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+.video-call-btn:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+	background: linear-gradient(90deg, #388e3c, #4caf50);
+}
+
+.phone-call-btn {
+	background: linear-gradient(90deg, #ff9800, #f57c00);
+	box-shadow: 0 0 10px rgba(255, 152, 0, 0.3);
+}
+
+.phone-call-btn:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 0 20px rgba(255, 152, 0, 0.6);
+	background: linear-gradient(90deg, #f57c00, #ff9800);
+}
+
+.back-btn {
+	margin-left: 650px;
+	margin-bottom: 20px;
+	background: #0a0a23;
+	box-shadow: 0 0 10px white;
+}
+
+.back-btn:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 0 20px rgba(158, 158, 158, 0.6);
+}
+
+footer {
+	text-align: center;
+	padding: 25px;
+	background: linear-gradient(180deg, rgba(10, 10, 35, 0.95),
+		rgba(10, 10, 35, 1));
+	color: #ccd1ff;
+	font-size: 14px;
+	border-top: 1px solid rgba(0, 183, 235, 0.15);
+	text-shadow: 0 0 5px rgba(0, 183, 235, 0.2);
+}

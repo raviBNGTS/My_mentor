@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details - My Mentor</title>
+    <link rel="stylesheet" href="css/course.css"> <!-- Updated to match previous CSS file name -->
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">My Mentor</div>
+            <ul id="nav-links">
+                <li><a href="main.html">Dashboard</a></li>
+                <li><a href="#" id="logout">Logout</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="course-details">
+        <h1 id="course-title">Course Details</h1>
+        <p id="course-description">Explore the details of your selected support option.</p>
+
+        <h3>Course Content:</h3>
+        <p id="course-content">Loading content...</p>
+
+        <h3>Price: <span id="course-price">$0.00</span></h3>
+        <p><strong>Category:</strong> <span id="course-category">General</span></p>
+
+        <button class="btn buy-course-btn" id="buy-now">Buy Now</button>
+
+        <div class="consultation-options">
+            <h4>Choose Consultation Type:</h4>
+            <button class="btn video-call-btn" id="whatsapp-video-call">Start Video Call via WhatsApp</button>
+            <button class="btn phone-call-btn" id="phone-call">Make Phone Call</button>
+        </div>
+
+        <a href="main.html" class="btn back-btn">Back to Dashboard</a>
+    </section>
+
+    <footer>
+        <p>© 2025 My Mentor. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Check login status
+        const currentUserEmail = localStorage.getItem('currentUser');
+        if (!currentUserEmail) {
+            window.location.href = 'login.html';
+        }
+
+        // Logout functionality
+        document.getElementById('logout').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('currentUser');
+            alert('Logged out successfully!');
+            window.location.href = 'login.html';
+        });
+
+        // Get course type from URL query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const courseType = urlParams.get('course');
+
+        // Elements to update
+        const courseTitle = document.getElementById('course-title');
+        const courseDescription = document.getElementById('course-description');
+        const courseContent = document.getElementById('course-content');
+        const coursePrice = document.getElementById('course-price');
+        const courseCategory = document.getElementById('course-category');
+
+        // Course list inspired by Udemy/Physics Wallah
+        const courses = {
+            'career-guidance': [
+                { title: 'Mastering Resume Writing', description: 'Learn to craft a standout resume that lands interviews.', content: 'Resume structure, keyword optimization, design tips.', price: '$49.99', category: 'Career Guidance' },
+                { title: 'Introduction to Data Analysis with Python', description: 'Dive into data analysis using Python.', content: 'Data cleaning, visualization, basic analysis.', price: '$79.99', category: 'Career Guidance' },
+                { title: 'Navigating Career Transitions', description: 'Gain strategies to pivot industries or roles.', content: 'Networking, upskilling, personal branding.', price: '$69.99', category: 'Career Guidance' },
+                { title: 'Public Speaking for Professionals', description: 'Master impactful presentations.', content: 'Speech writing, delivery techniques, confidence building.', price: '$59.99', category: 'Career Guidance' }
+            ],
+            'personal-doubts': [
+                { title: 'Overcoming Impostor Syndrome', description: 'Build confidence with guided introspection.', content: 'Mindfulness, self-assessment, overcoming fear.', price: '$39.99', category: 'Personal Doubts' },
+                { title: 'Decision-Making Under Pressure', description: 'Make clear decisions in high-stress situations.', content: 'Frameworks, stress management, practice scenarios.', price: '$49.99', category: 'Personal Doubts' },
+                { title: 'Clarity Through Journaling', description: 'Resolve uncertainties with guided journaling.', content: 'Journal prompts, reflection techniques, goal clarity.', price: '$29.99', category: 'Personal Doubts' },
+                { title: 'Building a Growth Mindset', description: 'Shift to growth thinking.', content: 'Embracing challenges, learning strategies, mindset exercises.', price: '$44.99', category: 'Personal Doubts' }
+            ],
+            'psychologist-consultation': [
+                { title: 'Mindfulness for Stress Relief', description: 'Manage stress with mindfulness practices.', content: 'Breathing exercises, meditation, stress reduction.', price: '$59.99', category: 'Psychologist Consultation' },
+                { title: 'Understanding Emotional Intelligence', description: 'Recognize and manage emotions effectively.', content: 'EQ basics, relationship skills, self-awareness.', price: '$69.99', category: 'Psychologist Consultation' },
+                { title: 'Coping with Anxiety: A Beginner’s Guide', description: 'Reduce anxiety with expert strategies.', content: 'Anxiety triggers, coping tools, relaxation methods.', price: '$79.99', category: 'Psychologist Consultation' },
+                { title: 'Intro to Cognitive Behavioral Therapy (CBT)', description: 'Reframe negative thoughts with CBT.', content: 'CBT principles, thought restructuring, practical exercises.', price: '$89.99', category: 'Psychologist Consultation' }
+            ],
+            'motivation-tips': [
+                { title: 'The Science of Motivation', description: 'Apply psychological principles to stay motivated.', content: 'Motivation theories, habit formation, goal setting.', price: '$34.99', category: 'Motivation Tips' },
+                { title: 'Productivity Hacks for Success', description: 'Boost efficiency with proven techniques.', content: 'Time management, prioritization, productivity tools.', price: '$39.99', category: 'Motivation Tips' },
+                { title: 'Inspirational Storytelling', description: 'Craft stories to ignite passion and drive.', content: 'Story structure, emotional impact, storytelling practice.', price: '$29.99', category: 'Motivation Tips' }
+            ]
+        };
+
+        // Select a random course from the relevant category
+        const availableCourses = courses[courseType] || [];
+        const randomCourse = availableCourses[Math.floor(Math.random() * availableCourses.length)] || {
+            title: 'Course Not Found',
+            description: 'Please select a valid course.',
+            content: 'No content available.',
+            price: 'N/A',
+            category: 'Unknown'
+        };
+
+        // Update page with course details
+        courseTitle.textContent = randomCourse.title;
+        courseDescription.textContent = randomCourse.description;
+        courseContent.textContent = randomCourse.content;
+        coursePrice.textContent = randomCourse.price;
+        courseCategory.textContent = randomCourse.category;
+
+        // Buy Now functionality
+        document.getElementById('buy-now').addEventListener('click', () => {
+            alert(`Purchasing ${randomCourse.title} for ${randomCourse.price}! Redirecting to payment...`);
+            // Replace with real payment gateway integration (e.g., redirect to '/purchase?course=' + randomCourse.title)
+        });
+
+        // Video Call functionality via WhatsApp
+        document.getElementById('whatsapp-video-call').addEventListener('click', () => {
+            const phoneNumber = '7869319228'; // Your provided number
+            const countryCode = '+1'; // USA country code
+            const whatsappUrl = `${countryCode}${phoneNumber}`; // WhatsApp expects full number without spaces or dashes
+            const whatsappVideoUrl = `https://wa.me/${whatsappUrl}?text=Requesting%20video%20call%20for%20${encodeURIComponent(randomCourse.title)}`;
+            
+            try {
+                window.open(whatsappVideoUrl, '_blank');
+                alert('Opening WhatsApp to request a video call. Please initiate the call from the chat.');
+            } catch (error) {
+                console.error('Error opening WhatsApp:', error);
+                alert('Failed to open WhatsApp. Please ensure WhatsApp is installed or try manually: ' + whatsappUrl);
+            }
+        });
+
+        // Phone Call functionality
+        document.getElementById('phone-call').addEventListener('click', () => {
+            const phoneNumber = '7869319228'; // Your provided number
+            const fullNumber = `+91${phoneNumber}`; // Including country code
+            
+            try {
+                window.location.href = `tel:${fullNumber}`;
+                // Fallback for desktop browsers
+                if (!/Mobi|Android/i.test(navigator.userAgent)) {
+                    setTimeout(() => {
+                        alert('For desktop users: Please dial this number manually: ' + fullNumber);
+                    }, 1000);
+                }
+            } catch (error) {
+                console.error('Error initiating phone call:', error);
+                alert('Unable to make phone call. Please dial manually: ' + fullNumber);
+            }
+        });
+    </script>
+</body>
+</html>

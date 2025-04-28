@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Mentor - Student Support</title>
+<link rel="stylesheet" href="css/styles.css">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+	rel="stylesheet">
+</head>
+<body>
+	<header>
+		<nav class="navbar">
+			<div class="logo">My Mentor</div>
+			<ul class="nav-links">
+				<li><a href="#" class="active">Home</a></li>
+				<li><a href="login">Login</a></li>
+				<li><a href="signup">SignUp</a></li>
+
+				<li><a href="/contact">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<section class="hero">
+		<div class="hero-content">
+			<h2>Empowering Students for a Better Future</h2>
+			<p>Choose the best support option for your academic and personal
+				growth.</p>
+			<a href="login" class="btn">Get Started</a>
+		</div>
+	</section>
+
+	<main>
+		<section class="options">
+			<h2>Select an Option</h2>
+			<div class="option-container">
+				<div class="option-card" data-tilt>
+					<h3>Career Guidance</h3>
+					<p>Get expert advice on choosing the right career path.</p>
+					<a href="careerguidance" class="select-button">Select</a>
+				</div>
+				<div class="option-card" data-tilt>
+					<h3>Personal Doubt</h3>
+					<p>Discuss your personal doubts and receive support.</p>
+					<a href="public/Personal_Doubt" class="select-button">Select</a>
+				</div>
+				<div class="option-card" data-tilt>
+					<h3>Psychologist Consultation</h3>
+					<p>Speak with a psychologist for mental health support.</p>
+					<a href="Psychologist Consultation" class="select-button">Select</a>
+				</div>
+				<div class="option-card" data-tilt>
+					<h3>Motivation Tips</h3>
+					<p>Receive strategies and tips to stay motivated.</p>
+					<a href="Motivation Tips" class="select-button">Select</a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<p>© 2025 Student Support Center. All rights reserved.</p>
+	</footer>
+
+	<!-- Scripts for 3D tilt effect and animations -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+	<script src="script.js"></script>
+	<script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
+<script>
+  window.addEventListener("DOMContentLoaded", function() {
+    window.AgentInitializer.init({
+      agentRenderURL: "https://agent.jotform.com/0196755e9efa7a6a9d27ea293d55015ca0d1",
+      rootId: "JotformAgent-0196755e9efa7a6a9d27ea293d55015ca0d1",
+      formID: "0196755e9efa7a6a9d27ea293d55015ca0d1",
+      queryParams: ["skipWelcome=1", "maximizable=1"],
+      domain: "https://www.jotform.com",
+      isDraggable: false,
+      background: "linear-gradient(180deg, #6C73A8 0%, #6C73A8 100%)",
+      buttonBackgroundColor: "#0066C3",
+      buttonIconColor: "#FFFFFF",
+      variant: false,
+      customizations: {
+        "greeting": "Yes",
+        "greetingMessage": "Hi! How can I assist you?",
+        "pulse": "Yes",
+        "position": "right"
+      },
+      isVoice: false,
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+71. What are the different ways to create objects in Java?
+Methods to create objects in Java are mentioned below:
+
+Using new keyword
+Using new instance
+Using clone() method
+Using deserialization
+Using the newInstance() method of the Constructor class
+
+
+72. What are the advantages and disadvantages of object cloning?
+There are many advantages and disadvantages of using object cloning as mentioned below:
+
+Advantages:
+
+In Java, the ‘=’ assignment operator cannot be used for cloning as it simply creates a copy of reference variables. To overcome such discrepancy the clone() method of Object class can be used over the assignment operator.
+The clone() method is a protected method of class Object which means that only the Employee class can clone Employee objects. This means no class other than Employee can clone Employee objects since it does not know the Employee class’ attributes.
+Code size decreases as repetition decreases. 
+Allows replication (kind of like prototype pattern) manually initilizing each field creates large code if object is complex, its faster with cloning.
+Disadvantages:
+
+As the Object.clone() method is protected, so need to provide our own clone() and indirectly call Object.clone() from it.
+If we don’t have any methods then we need to provide a Cloneable interface as we need to provide JVM information so that we can perform a clone() on our object.if not, we cant clone clone does shallow copy of fields if we just return super.clone() from clone method that can be problematic.
+
+
+84. What are the differences between abstract class and interface?
+Abstract-class-and-interface-768
+
+Abstract Class
+
+Interface Class
+
+Both abstract and non-abstract methods may be found in an abstract class.
+
+The interface contains only abstract methods.
+
+Abstract Class supports Final methods.
+
+The interface class does not support Final methods.
+
+Multiple inheritance is not supported by the Abstract class.
+
+Multiple inheritances is supported by Interface Class.
+
+Abstract Keyword is used to declare Abstract class.
+
+Interface Keyword is used to declare the interface class.
+
+extend keyword is used to extend an Abstract Class.	implements keyword is used to implement the interface.
+Abstract Class has members like protected, private, etc.
+
+All class members are public by default.
+
+
+
+99. State the difference between Composition and Aggregation.
+Aggregation
+
+Composition
+
+It defines a “has a” relationship between the objects
+
+It represents the part-of relationship
+
+Objects are independent of each other.
+
+Objects are dependent on each other.
+
+Represent it by using the filled diamond.
+
+Represent it by using the empty diamond.
+
+Child objects don’t have a lifetime.
+
+Child objects have a lifetime.
+
+
+Method Overloading
+
+Method Overriding
+
+When two or multiple methods are in the same class with different parameters but the same name.
+
+When a subclass provides its own implementation of a method that is already defined in the parent class.
+
+Method overloading can only happen in the same class or between a subclass or parent class.
+
+Method overriding can only happen in Subclass.
+
+When an error occurs it is caught at the compile time of the program.
+
+When an error occurs it is caught at Runtime of the program.
+
+Example of Compile Time Polymorphism.
+
+Example of Run Time Polymorphism.
+
+Method Overloading may or may not require Inheritance.
+
+Method overriding always needs Inheritance.
+
+
+
+
+163. What will happen if you put System.exit(0) on the try or catch block? Will finally block execute?
+System.exit(int) has the capability to throw SecurityException. So, if in case of security, the exception is thrown then finally block will be executed otherwise JVM will be closed while calling System. exit(0) because of which finally block will not be executed.
+
+164. What do you understand by Object Cloning and how do you achieve it in Java?
+It is the process of creating an exact copy of any object. In order to support this, a java class has to implement the Cloneable interface of java.lang package and override the clone() method provided by the Object class the syntax of which is:
+
+Protected Object clone() throws CloneNotSupportedException{ return (Object)super.clone();}In case the Cloneable interface is not implemented and just the method is overridden, it results in CloneNotSupportedException in Java.
+
+165. How do exceptions affect the program if it doesn’t handle them?
+Exceptions are responsible for abruptly terminating the running of the program while executing and the code written after the exception occurs is not executed.
+
+
+175. Describe the life cycle of the thread?
+Cycle-of-thread-768
+
+A thread in Java at any point in time exists in any one of the following states. A thread lies only in one of the shown states at any instant: 
+
+New: The thread has been created but has not yet started.
+Runnable: The thread is running, executing its task, or is ready to run if there are no other higher-priority threads.
+Blocked: The thread is temporarily suspended, waiting for a resource or an event.
+Waiting: The thread is waiting for another thread to perform a task or for a specified amount of time to elapse.
+Terminated: The thread has completed its task or been terminated by another thread.
+
+
+180. How does multi-threading take place on a computer with a single CPU?
+Java uses a technique called time-sharing, commonly referred to as time-slicing, to implement multi-threading on computers with a single CPU. The appearance of parallel execution is created by the CPU switching between active threads. The operating system is in charge of allocating CPU time to each thread sequentially and scheduling the threads.
+
+In order to stop threads from interacting with one another and creating race situations or other issues, Java has a number of ways to govern the behavior of threads, including synchronization and locking. It is feasible to create multi-threaded programmers that operate correctly and effectively on a machine with a single CPU by regulating the interaction between threads and making sure that crucial code parts are synchronized. In contrast to running the same program on a computer with multiple CPUs or cores, multi-threading on a single CPU can only give the appearance of parallelism, and actual performance gains may be modest. The operating system divides the CPU time that is available when numerous threads are running on a single CPU into small time slices and gives each thread a time slice to execute. Rapid switching between the threads by the operating system creates the appearance of parallel execution. The switching between threads appears to be immediate because the time slices are often very tiny, on the order of milliseconds or microseconds.
+
+
+
+
+182. Why Garbage Collection is necessary in Java?
+For Java, Garbage collection is necessary to avoid memory leaks which can cause the program to crash and become unstable. There is no way to avoid garbage collection in Java. Unlike C++, Garbage collection in Java helps programmers to focus on the development of the application instead of managing memory resources and worrying about memory leakage. Java Virtual Machine (JVM) automatically manages the memory periodically by running a garbage collector which frees up the unused memory in the application. Garbage collection makes Java memory efficient because it removes unreferenced objects from the heap memory.
+
+183. What is the drawback of Garbage Collection?
+Apart from many advantages, Garbage Collector has certain drawbacks mentioned below:
+
+The main drawback to Garbage collection is that it can cause pauses in an application’s execution as it works to clear the memory which slows down the performance of the application. 
+The Process of Garbage collection is non-deterministic which makes it difficult to predict when garbage collection occurs which causes unpredictable behavior in applications. For Example, if we write any program then it is hard for programmers to decide if the issue is caused by garbage collection or by any other factors in the program. 
+Garbage collection can also increase memory usage if the program creates and discards a lot of short-lived objects.
+184. Explain the difference between a minor, major, and full garbage collection.
+The Java Virtual Machine (JVM) removes objects that are no longer in use using a garbage collector which periodically checks and removes these objects. There are different types of garbage collection in the JVM, each with different characteristics and performance implications. The main types of garbage collection are:
+
+Minor garbage collection: Also known as young generation garbage collection, this type of garbage collection is used to collect and reclaim memory that is used by short-lived objects (objects that are quickly created and discarded). 
+Major garbage collection: Also known as old-generation garbage collection, this type of garbage collection is used to collect and reclaim memory that is used by long-lived objects (objects that survive multiple minor garbage collections and are promoted to the old generation).
+Full garbage collection: During full garbage collection, memories from all generations are collected and reclaimed, including memories of young and old. A full garbage collection normally takes longer to complete than a minor or major garbage collection which causes that app to pause temporarily.
+185. How will you identify major and minor garbage collections in Java?
+Major garbage collection works on the survivor space and Minor garbage collection works on the Eden space to perform a mark-and-sweep routine. And we can identify both of them based on the output where the minor collection prints “GC”, whereas the major collection prints “Full GC” for the case where the garbage collection logging is enabled with “-XX:PrintGCDetails” or “verbose:gc”.
+
+186. What is a memory leak, and how does it affect garbage collection?
+In Java Memory leaks can be caused by a variety of factors, such as not closing resources properly, holding onto object references longer than necessary, or creating too many objects unnecessarily. There are situations in which garbage collector does not collect objects because there is a reference to those objects. In these situations where the application creates lots of objects and does not use them and every object has some valid references, a Garbage collector in Java cannot destroy the objects. These useless objects which do not provide any value to the program are known as Memory leaks. Memory leaks can impact garbage collection negatively by preventing the garbage collector from reclaiming unused memory. This behavior will lead to slow performance or sometimes system failure. In a program, it is important to avoid memory leaks by managing resources and object references properly. 

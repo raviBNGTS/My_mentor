@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultra Traffic Analysis - My Mentor</title>
+    <link rel="stylesheet" href="css/traffic-analysis.css">
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Leaflet.js for geolocation mapping -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">My Mentor</div>
+            <ul id="nav-links">
+                <li><a href="main.html">Dashboard</a></li>
+                <li><a href="#" id="logout">Logout</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="analysis-container">
+        <h1>Ultra Traffic Analysis</h1>
+        <p>Real-time insights into web and network traffic.</p>
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <h3>Controls</h3>
+            <select id="data-source">
+                <option value="web">Web Traffic</option>
+                <option value="network">Network Traffic</option>
+                <option value="combined">Combined Analysis</option>
+            </select>
+            <button class="btn" id="start-analysis">Start Analysis</button>
+            <button class="btn" id="stop-analysis">Stop Analysis</button>
+            <button class="btn" id="export-pdf">Export PDF</button>
+        </div>
+
+        <!-- Dashboard Sections -->
+        <div class="dashboard">
+            <!-- Bandwidth Usage -->
+            <div class="card">
+                <h3>Bandwidth Usage</h3>
+                <canvas id="bandwidth-chart"></canvas>
+            </div>
+
+            <!-- Top Talkers -->
+            <div class="card">
+                <h3>Top Talkers</h3>
+                <canvas id="top-talkers-chart"></canvas>
+            </div>
+
+            <!-- Geolocation Map -->
+            <div class="card">
+                <h3>Traffic Origins</h3>
+                <div id="geo-map" style="height: 300px;"></div>
+            </div>
+
+            <!-- Packet Analysis -->
+            <div class="card">
+                <h3>Packet Analysis</h3>
+                <pre id="packet-data">Packet data will appear here...</pre>
+            </div>
+
+            <!-- User Behavior -->
+            <div class="card">
+                <h3>User Behavior</h3>
+                <canvas id="behavior-chart"></canvas>
+            </div>
+
+            <!-- Anomaly Detection -->
+            <div class="card">
+                <h3>Anomaly Detection</h3>
+                <ul id="anomaly-list"></ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 My Mentor. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Check login status
+        const currentUserEmail = localStorage.getItem('currentUser');
+        if (!currentUserEmail) {
+            window.location.href = 'login.html';
+        }
+
+        // Logout functionality
+        document.getElementById('logout').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('currentUser');
+            alert('Logged out successfully!');
+            window.location.href = 'login.html';
+        });
+
+        // Chart.js Initialization
+        const bandwidthCtx = document.getElementById('bandwidth-chart').getContext('2d');
+        const topTalkersCtx = document.getElementById('top-talkers-chart').getContext('2d');
+        const behaviorCtx = document.getElementById('behavior-chart').getContext('2d');
+
+        const bandwidthChart = new Chart(bandwidthCtx, {
+            type: 'line',
+            data: { labels: [], datasets: [{ label: 'Bandwidth (Mbps)', data: [], borderColor: '#00b7eb', fill: false }] },
+            options: { responsive: true, scales: { y: { beginAtZero: true } } }
+        });
+
+        const topTalkersChart = new Chart(topTalkersCtx, {
+            type: 'bar',
+            data: { labels: [], datasets: [{ label: 'Traffic (MB)', data: [], backgroundColor: '#4caf50' }] },
+            options: { responsive: true }
+        });
+
+        const behaviorChart = new Chart(behaviorCtx, {
+            type: 'doughnut',
+            data: { labels: [], datasets: [{ label: 'Actions', data: [], backgroundColor: ['#ff9800', '#f44336', '#4caf50'] }] },
+            options: { responsive: true }
+        });
+
+        // Leaflet Map Initialization
+        const map = L.map('geo-map').setView([51.505, -0.09], 2); // Default center (world view)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Simulated Data (replace with real API calls)
+        let analysisRunning = false;
+        const updateInterval = 2000; // Update every 2 seconds
+
+        function updateData() {
+            if (!analysisRunning) return;
+
+            const dataSource = document.getElementById('data-source').value;
+
+            // Simulated Web Traffic Data
+            if (dataSource === 'web' || dataSource === 'combined') {
+                bandwidthChart.data.labels.push(new Date().toLocaleTimeString());
+                bandwidthChart.data.datasets[0].data.push(Math.random() * 100);
+                if (bandwidthChart.data.labels.length > 20) {
+                    bandwidthChart.data.labels.shift();
+                    bandwidthChart.data.datasets[0].data.shift();
+                }
+                bandwidthChart.update();
+
+                topTalkersChart.data.labels = ['Page Views', 'Clicks', 'Downloads'];
+                topTalkersChart.data.datasets[0].data = [Math.random() * 50, Math.random() * 30, Math.random() * 20];
+                topTalkersChart.update();
+
+                behaviorChart.data.labels = ['Login', 'Search', 'Purchase'];
+                behaviorChart.data.datasets[0].data = [Math.random() * 60, Math.random() * 30, Math.random() * 10];
+                behaviorChart.update();
+            }
+
+            // Simulated Network Traffic Data
+            if (dataSource === 'network' || dataSource === 'combined') {
+                document.getElementById('packet-data').textContent = `Packet #${Math.floor(Math.random() * 1000)}: Src: 192.168.1.${Math.floor(Math.random() * 255)}, Dst: 10.0.0.${Math.floor(Math.random() * 255)}, Protocol: TCP`;
+
+                const anomalyList = document.getElementById('anomaly-list');
+                if (Math.random() > 0.8) {
+                    const li = document.createElement('li');
+                    li.textContent = `Anomaly detected: Unusual traffic spike at ${new Date().toLocaleTimeString()}`;
+                    anomalyList.prepend(li);
+                }
+            }
+
+            // Simulated Geolocation Data
+            const lat = Math.random() * 180 - 90;
+            const lon = Math.random() * 360 - 180;
+            L.marker([lat, lon]).addTo(map).bindPopup(`Traffic from (${lat.toFixed(2)}, ${lon.toFixed(2)})`);
+
+            setTimeout(updateData, updateInterval);
+        }
+
+        // Control Buttons
+        document.getElementById('start-analysis').addEventListener('click', () => {
+            if (!analysisRunning) {
+                analysisRunning = true;
+                updateData();
+                alert('Analysis started!');
+            }
+        });
+
+        document.getElementById('stop-analysis').addEventListener('click', () => {
+            analysisRunning = false;
+            alert('Analysis stopped!');
+        });
+
+        document.getElementById('export-pdf').addEventListener('click', () => {
+            // Placeholder for PDF export (requires jsPDF or similar)
+            alert('Exporting data to PDF... (Feature under development)');
+        });
+    </script>
+</body>
+</html>
