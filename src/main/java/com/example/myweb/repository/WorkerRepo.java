@@ -11,4 +11,9 @@ public interface WorkerRepo extends JpaRepository<WorkerCourse, Integer>{
     public List<WorkerCourse> findByEmail(String toLowerCase);
 	
 
+//get all courses by cateogory
+
+      public List<WorkerCourse> findByCategory(String category);
+
+
 }

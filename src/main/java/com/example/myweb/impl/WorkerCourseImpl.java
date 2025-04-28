@@ -39,7 +39,7 @@ public class WorkerCourseImpl implements WorkerService {
 //			file path 
 		String filepath = UPLOAD_DIR + File.separator + name;
 
-		// copy and savve file
+		// copy and save file
 
 		if (Files.exists(Paths.get(filepath))) {
 			throw new FileAlreadyExistsException(name);
@@ -70,5 +70,12 @@ public class WorkerCourseImpl implements WorkerService {
     public void deleteCourse(int courseId) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    //get all courses by category
+    @Override
+    public List<WorkerCourse> getCoursesByCategory(String category) {
+        return repo.findByCategory(category);
+    }
+
 
 }

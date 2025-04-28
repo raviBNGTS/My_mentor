@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Courses in [[${category}]]</title>
+    <link rel="stylesheet" th:href="@{/css/courses.css}">
+</head>
+<body>
+<h1>Courses in Category: <span th:text="${category}"></span></h1>
+
+<div class="course-container">
+    <div class="course-card" th:each="course : ${courses}">
+        <h2 th:text="${course.title}"></h2>
+        <p th:text="${course.description}"></p>
+        <p><strong>Price:</strong> ₹<span th:text="${course.price}"></span></p>
+    </div>
+</div>
+
+<script src="/js/courses.js"></script>
+</body>
+</html>

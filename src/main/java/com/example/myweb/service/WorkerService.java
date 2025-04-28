@@ -16,4 +16,8 @@ public interface WorkerService {
 
     public void deleteCourse(int courseId);
 
+    //get all course by category
+   public List<WorkerCourse> getCoursesByCategory(String category);
+
+
 }
