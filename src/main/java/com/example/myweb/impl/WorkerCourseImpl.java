@@ -28,9 +28,9 @@ public class WorkerCourseImpl implements WorkerService {
 
 		// folder nhi hoga to folder nhi banega
 
-		File uploadFFolder = new File(UPLOAD_DIR);
-		if (!uploadFFolder.exists()) {
-			uploadFFolder.mkdir();
+		File uploadFolder = new File(UPLOAD_DIR);
+		if (!uploadFolder.exists()) {
+			uploadFolder.mkdirs();
 		}
 
 		// file name get
@@ -50,7 +50,7 @@ public class WorkerCourseImpl implements WorkerService {
 		course.setFileName(file.getOriginalFilename());
 
 		repo.save(course);
-		return "course uploaded succes";
+		return "course uploaded success";
 
 	}
 
