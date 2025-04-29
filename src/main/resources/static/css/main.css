@@ -158,9 +158,13 @@ nav ul li a:hover, nav ul li a.active {
 }
 
 .dashboard-options {
-	margin-top:10px;
+    margin-top: 10px;
     padding: 80px 60px;
     background: linear-gradient(180deg, rgba(10, 10, 35, 0.8), rgba(10, 10, 35, 0.95));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centers the items horizontally */
+    gap: 30px; /* Spacing between the items */
 }
 
 .dashboard-options h2 {
@@ -173,14 +177,7 @@ nav ul li a:hover, nav ul li a.active {
     animation: fadeInUp 1s ease-out;
 }
 
-.option-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+
 
 .option-card {
     background: linear-gradient(135deg, rgba(20, 20, 50, 0.9), rgba(10, 10, 35, 0.85));
@@ -191,13 +188,14 @@ nav ul li a:hover, nav ul li a.active {
     box-shadow: 0 8px 25px rgba(0, 128, 255, 0.15);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
 .option-card:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 12px 35px rgba(0, 183, 235, 0.3);
 }
-
 .option-card h3 {
     font-size: 24px;
     color: #e0e0ff;
@@ -211,7 +209,6 @@ nav ul li a:hover, nav ul li a.active {
     color: #ccd1ff;
     margin-bottom: 25px;
 }
-
 
 
 .parent-container{
@@ -348,4 +345,172 @@ footer {
     .dashboard-options, .content-section { padding: 60px 20px; }
     .option-card { width: 100%; max-width: 320px; }
     .cta-buttons { flex-direction: column; gap: 15px; }
+}
+
+
+/* Hero Section Styles */
+.hero {
+    background: #f4f4f4;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.hero-content h2 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.hero .btn {
+    background-color: #0066C3;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* Courses Scroller Styles */
+.courses {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.courses h2 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.courses-scroller {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 10px 0;
+    scroll-behavior: smooth;
+}
+
+.course-card {
+    flex: 0 0 auto;
+    width: 250px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.course-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.course-card h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 15px;
+}
+
+.course-card p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Main Section Styles */
+main {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 40px 20px;
+}
+
+.options {
+  text-align: center;
+  padding: 2rem;
+}
+
+.option-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.option-card {
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  padding: 1.5rem;
+  width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  text-align: left;
+}
+
+.option-card p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+}
+
+.category-name {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+
+.select-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #0057ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.select-button:hover {
+  background-color: #003fb3;
+}
+
+/* Responsive Design */
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-options {
+        padding: 40px 20px; /* Adjust padding for small screens */
+    }
+
+    .option-container {
+        flex-direction: column; /* Stack the items vertically */
+        align-items: center; /* Center align the items */
+        gap: 20px; /* Adjust the gap between items */
+    }
+
+    .option-card {
+        width: 90%; /* Allow the cards to take up more width on smaller screens */
+        max-width: 350px; /* Limit the maximum width */
+    }
+}
+
+@media (max-width: 480px) {
+    .option-card {
+        width: 90%;
+    }
+
+    .course-card {
+        width: 90%;
+    }
 }

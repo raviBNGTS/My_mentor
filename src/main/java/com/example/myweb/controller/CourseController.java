@@ -23,4 +23,5 @@ public class CourseController {
         model.addAttribute("category", category);
         return "courses-by-category";
     }
+
 }

@@ -167,7 +167,6 @@ nav ul li a:hover, nav ul li a.active {
     justify-content: center;
     gap: 35px;
     flex-wrap: wrap;
-    max-width: 1200px;
     margin: 0 auto;
 }
 
