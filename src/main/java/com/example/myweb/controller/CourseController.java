@@ -11,10 +11,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/courses")
+@CrossOrigin(origins = "*")
 public class CourseController {
 
     @Autowired
     private WorkerService workerService;
+
 
     @GetMapping("/category/{category}")
     public String getAllCoursesByCategory(@PathVariable String category, Model model) {
@@ -23,5 +25,8 @@ public class CourseController {
         model.addAttribute("category", category);
         return "courses-by-category";
     }
+
+
+
 
 }

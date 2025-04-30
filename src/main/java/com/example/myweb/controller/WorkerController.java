@@ -3,6 +3,7 @@ package com.example.myweb.controller;
 import java.io.IOException;
 import java.util.List;
 
+import com.example.myweb.repository.WorkerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,8 @@ public class WorkerController {
 	@Autowired
 	private WorkerService workerService;
 
+	@Autowired
+    private WorkerRepo repo;
 	@GetMapping("/workerdashboard")
 	public String workerDashboard(Model model) {
 		model.addAttribute("pageTitle", "Upload Your Course - My Mentor");
@@ -61,5 +64,11 @@ public String deleteCourse(@PathVariable int id) {
     workerService.deleteCourse(id);
     return "Course deleted successfully.";
 }
+
+	@GetMapping("/courses")
+	@ResponseBody
+	public List<WorkerCourse> getAllCourses() {
+		return repo.findAll();
+	}
 
 }
