@@ -9,7 +9,7 @@ header {
 	position: fixed;
 	top: 0;
 	width: 100%;
-	height: 60px; /* Yahan aap apne navbar ka exact height dalen */
+	height: 60px;
 	background-color: #333;
 	z-index: 1000;
 }
@@ -35,6 +35,8 @@ header {
 					<li><a th:href="@{/}">Home</a></li>
 					<li><a th:href="@{/main}">Dashboard</a></li>
 					<li><a th:href="@{/contact}">Contact</a></li>
+					<li><a href="/templates/my-account.html"> My Account <span class="material-symbols-outlined">account_circle</span></a></li>
+
 					<li>
 						<form th:action="@{/logout}" method="post"
 							style="display: inline;">
@@ -49,12 +51,10 @@ header {
 			<h2>
 				Welcome back, <span th:text="${fullName}">User</span>!
 			</h2>
-			<p>Explore your dashboard and access your mentor resources.</p>
 		</div>
 
 
 		<div class="dashboard-options">
-			<h2>Your Options</h2>
 			<div class="option-container">
 				<div class="option-card">
 					<h3>Career Guidance</h3>
@@ -81,13 +81,13 @@ header {
 				</div>
 			</div>
 		</div>
-		<div class="parent-container">
-			<div class="option-card1">
-				<h3>Select an option above</h3>
-				<p>Choose a support option yo view detailed information here</p>
-				<a th:href="@{/wellness}" class="select-button">Explore</a>
-			</div>
-		</div>
+<!--		<div class="parent-container">-->
+<!--			<div class="option-card1">-->
+<!--				<h3>Select an option above</h3>-->
+<!--				<p>Choose a support option yo view detailed information here</p>-->
+<!--				<a th:href="@{/wellness}" class="select-button">Explore</a>-->
+<!--			</div>-->
+<!--		</div>-->
 	</section>
 
 

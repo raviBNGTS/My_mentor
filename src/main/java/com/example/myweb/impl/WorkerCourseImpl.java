@@ -2,12 +2,12 @@ package com.example.myweb.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,56 +26,73 @@ public class WorkerCourseImpl implements WorkerService {
 	@Override
 	public String addCourse(WorkerCourse course, MultipartFile file) throws IOException {
 
-		// folder nhi hoga to folder nhi banega
-
+		// Create the upload folder if it doesn't exist
 		File uploadFolder = new File(UPLOAD_DIR);
 		if (!uploadFolder.exists()) {
 			uploadFolder.mkdirs();
 		}
 
-		// file name get
-		String name = file.getOriginalFilename();
+		if (file != null && !file.isEmpty()) {
+			// Get the original file name
+			String originalName = file.getOriginalFilename();
 
-//			file path 
-		String filepath = UPLOAD_DIR + File.separator + name;
+			// Generate a unique file name to avoid conflicts
+			String uniqueName = System.currentTimeMillis() + "_" + originalName;
 
-		// copy and save file
+			// File path
+			String filepath = UPLOAD_DIR + File.separator + uniqueName;
 
-		if (Files.exists(Paths.get(filepath))) {
-			throw new FileAlreadyExistsException(name);
+			// Copy and save the file
+			Files.copy(file.getInputStream(), Paths.get(filepath));
+
+			// Set the unique file name in the course
+			course.setFileName(uniqueName);
+		} else {
+			// No file provided, set file name as null
+			course.setFileName(null);
 		}
 
-		Files.copy(file.getInputStream(), Paths.get(filepath));
-
-		course.setFileName(file.getOriginalFilename());
-
+		// Save the course to the repository
 		repo.save(course);
-		return "course uploaded success";
 
+		return "Course uploaded successfully.";
 	}
 
 	@Override
-    public List<WorkerCourse> getCoursesByEmail(String email) {
-        // remove the UnsupportedOperationException line!
-        return repo.findByEmail(email.trim().toLowerCase());  // or however you store e-mails
-    }
+	public List<WorkerCourse> getCoursesByEmail(String email) {
+		// remove the UnsupportedOperationException line!
+		return repo.findByEmail(email.trim().toLowerCase());  // or however you store e-mails
+	}
 
 
-    @Override
-    public WorkerCourse updateCourse(int courseId, WorkerCourse updatedCourse) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+	@Override
+	public WorkerCourse updateCourse(int courseId, WorkerCourse updatedCourse) {
+		// Check if the course exists
+		WorkerCourse existingCourse = repo.findById(courseId)
+				.orElseThrow(() -> new IllegalArgumentException("Course with ID " + courseId + " not found"));
 
-    @Override
-    public void deleteCourse(int courseId) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+		// Update the fields of the existing course with the new values
+		existingCourse.setTitle(updatedCourse.getTitle());
+		existingCourse.setDescription(updatedCourse.getDescription());
+		existingCourse.setCategory(updatedCourse.getCategory());
+		existingCourse.setPrice(updatedCourse.getPrice());
+		existingCourse.setFileName(updatedCourse.getFileName()); // Optional: Update file name if needed
 
-    //get all courses by category
-    @Override
-    public List<WorkerCourse> getCoursesByCategory(String category) {
-        return repo.findByCategory(category);
-    }
+		// Save the updated course to the repository
+		return repo.save(existingCourse);
+	}
 
+	@Override
+	public void deleteCourse(int courseId) {
+		// Check if the course exists
+		WorkerCourse course = repo.findById(courseId)
+				.orElseThrow(() -> new IllegalArgumentException("Course with ID " + courseId + " not found"));
+
+		// Delete the course
+		repo.delete(course);
+	}
+	public List<WorkerCourse> getTopCourses(int limit) {
+		return repo.findTopCourses(PageRequest.of(0, limit));
+	}
 
 }
